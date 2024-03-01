@@ -21,6 +21,7 @@ interface PoemViewProps {
 export class PoemView extends Component<PoemViewProps> {
     constructor(props: PoemViewProps) {
         super(props);
+        this.containerRef = React.createRef();
         this.state = {
             dragging: false,
             selectedWords: [],
@@ -40,12 +41,14 @@ export class PoemView extends Component<PoemViewProps> {
     };
 
     handleMouseMove = (event) => {
+
+        console.log('moveing')
+
         const { dragging } = this.state;
         if (!dragging) return;
     
-        // Calculate the position of the mouse pointer relative to the container
-        console.log(event.currentTarget);
-        const containerBounds = event.currentTarget.parentNode.getBoundingClientRect();
+        // Obtain the bounding rectangle of the container
+        const containerBounds = this.containerRef.current.getBoundingClientRect();
         const mouseX = event.clientX - containerBounds.left;
         const mouseY = event.clientY - containerBounds.top;
     
@@ -63,8 +66,20 @@ export class PoemView extends Component<PoemViewProps> {
                 wordX <= containerBounds.width && wordY <= containerBounds.height &&
                 Math.abs(mouseX - wordX) <= wordBounds.width / 2 && Math.abs(mouseY - wordY) <= wordBounds.height / 2
             ) {
-                // If the PoemWord is within the drag area, add it to the selectedWords array
+                console.log(selectedWords)
+                // If the PoemWord is within the drag area, add its text content to the selectedWords array
                 selectedWords.push(word.textContent);
+                // Update the selection state of the PoemWord component
+                const poemWord = word.querySelector('.poemWord');
+                if (poemWord) {
+                    poemWord.classList.add('selected');
+                }
+            } else {
+                // If the PoemWord is not within the drag area, remove its selection state
+                const poemWord = word.querySelector('.poemWord');
+                if (poemWord) {
+                    poemWord.classList.remove('selected');
+                }
             }
         }
     
@@ -78,7 +93,7 @@ export class PoemView extends Component<PoemViewProps> {
 
         return (
             <div className="poemViewPort" style={{ fontSize }}>
-                <div className="poemViewWrapper" onMouseDown={this.handleMouseDown}>
+                <div className="poemViewWrapper" ref={this.containerRef} onMouseDown={this.handleMouseDown}>
                     {
                         poemContent.map((content, index) => (
                             <PoemParagraph key={index} color={index % 2 === 0 ? "white" : "#EFEFEF"}>
@@ -111,6 +126,7 @@ export class PoemView extends Component<PoemViewProps> {
         );
     }
 }
+
 
 
 interface PoemParagraphProps {
