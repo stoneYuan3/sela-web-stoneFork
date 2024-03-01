@@ -19,95 +19,99 @@ interface PoemViewProps {
 }
 
 export class PoemView extends Component<PoemViewProps> {
+    constructor(props: PoemViewProps) {
+        super(props);
+        this.state = {
+            dragging: false,
+            selectedWords: [],
+        };
+    }
+
+    handleMouseDown = () => {
+        this.setState({ dragging: true });
+        document.addEventListener('mouseup', this.handleMouseUp);
+        document.addEventListener('mousemove', this.handleMouseMove);
+    };
+
+    handleMouseUp = () => {
+        this.setState({ dragging: false });
+        document.removeEventListener('mouseup', this.handleMouseUp);
+        document.removeEventListener('mousemove', this.handleMouseMove);
+    };
+
+    handleMouseMove = (event) => {
+        const { dragging } = this.state;
+        if (!dragging) return;
+    
+        // Calculate the position of the mouse pointer relative to the container
+        console.log(event.currentTarget);
+        const containerBounds = event.currentTarget.parentNode.getBoundingClientRect();
+        const mouseX = event.clientX - containerBounds.left;
+        const mouseY = event.clientY - containerBounds.top;
+    
+        // Iterate over all PoemWord components and check if they are within the drag area
+        const selectedWords = [];
+        const poemWords = document.getElementsByClassName('poemWord');
+        for (let i = 0; i < poemWords.length; i++) {
+            const word = poemWords[i];
+            const wordBounds = word.getBoundingClientRect();
+            const wordX = wordBounds.left - containerBounds.left + wordBounds.width / 2;
+            const wordY = wordBounds.top - containerBounds.top + wordBounds.height / 2;
+    
+            if (
+                wordX >= 0 && wordY >= 0 &&
+                wordX <= containerBounds.width && wordY <= containerBounds.height &&
+                Math.abs(mouseX - wordX) <= wordBounds.width / 2 && Math.abs(mouseY - wordY) <= wordBounds.height / 2
+            ) {
+                // If the PoemWord is within the drag area, add it to the selectedWords array
+                selectedWords.push(word.textContent);
+            }
+        }
+    
+        // Update the state to reflect the selected words
+        this.setState({ selectedWords });
+    };
+    
+
     render() {
         const { poemContent, mode, fontSize, bgColour, pickerStatus, wordStatus, setWordStatus, wordArray, updateNewArray, colour_Bg, bgButtonClicked} = this.props;
 
-        var pickerOn = pickerStatus;
-        var background = bgColour;
-
-        // console.log(poemContent);
-        const componentStyle = {
-            fontSize: fontSize,
-        };
-        var poemStructure;
-        switch (mode) {
-            case "structure":
-                poemStructure = (
-                    <>
-                        <div className="poemViewPort" style={componentStyle}>
-                            {
-                                poemContent.map((content, index) => (
-                                    <PoemParagraph
-                                        key={index}
-                                        color={index % 2 === 0 ? "white" : "#EFEFEF"}
-                                    >
-                                        {content.map((lineContent, index) => (
-                                            <PoemLine key={index}>
-                                                {
-                                                    lineContent.map((word,wordIndex) => (
-                                                        <PoemWord 
-                                                            key={wordIndex} 
-                                                            color="black" 
-                                                            backgroundColor={colour_Bg} 
-                                                            borderColour="grey" 
-                                                            text={word} 
-                                                            wordStatus={wordStatus} 
-                                                            setWordStatus={setWordStatus} 
-                                                            wordArray={wordArray}
-                                                            updateNewArray={updateNewArray}
-                                                            // wordArrayAdd={wordArrayAdd}
-                                                            bgButtonClicked={bgButtonClicked}
-                                                        />
-                                                    ))
-                                                }
-                                            </PoemLine>
-                                        ))}
-                                    </PoemParagraph>
-                                ))
-                            }
-                        </div>
-                    </>
-                );
-                break;
-            default:
-                poemStructure = (
-                    <>
-                        <div className="poemViewPort" style={componentStyle}>
-                            {
-                                poemContent.map((content, index) => (
-                                    <PoemParagraph key={index} color={"white"}>
-                                        {content.map((lineContent, index) => (
-                                            <PoemLine key={index}>
-                                                {
-                                                    lineContent.map((word,wordIndex) => (
-                                                        <PoemWord 
-                                                            key={wordIndex} 
-                                                            color="black" 
-                                                            backgroundColor={colour_Bg} 
-                                                            borderColour="grey" 
-                                                            text={word} 
-                                                            wordStatus={wordStatus} 
-                                                            setWordStatus={setWordStatus} 
-                                                            wordArray={wordArray}
-                                                            updateNewArray={updateNewArray}
-                                                            // wordArrayAdd={wordArrayAdd}
-                                                            bgButtonClicked={bgButtonClicked}
-                                                        />
-                                                    ))
-                                                }
-                                            </PoemLine>
-                                        ))}
-                                    </PoemParagraph>
-                                ))
-                            }
-                        </div>
-                    </>
-                );
-                break;
-        }
-        return poemStructure;
+        return (
+            <div className="poemViewPort" style={{ fontSize }}>
+                <div className="poemViewWrapper" onMouseDown={this.handleMouseDown}>
+                    {
+                        poemContent.map((content, index) => (
+                            <PoemParagraph key={index} color={index % 2 === 0 ? "white" : "#EFEFEF"}>
+                                {content.map((lineContent, index) => (
+                                    <PoemLine key={index}>
+                                        {
+                                            lineContent.map((word,wordIndex) => (
+                                                <PoemWord 
+                                                    key={wordIndex} 
+                                                    color="black" 
+                                                    backgroundColor={colour_Bg} 
+                                                    borderColour="grey" 
+                                                    text={word} 
+                                                    wordStatus={wordStatus} 
+                                                    setWordStatus={setWordStatus} 
+                                                    wordArray={wordArray}
+                                                    updateNewArray={updateNewArray}
+                                                    bgButtonClicked={bgButtonClicked}
+                                                    selected={this.state.selectedWords.includes(word)}
+                                                />
+                                            ))
+                                        }
+                                    </PoemLine>
+                                ))}
+                            </PoemParagraph>
+                        ))
+                    }
+                </div>
+            </div>
+        );
     }
 }
+
 
 interface PoemParagraphProps {
     key: number;
