@@ -68,12 +68,12 @@ export const PoemView: React.FC<PoemViewProps> = ({
         };
         setSelectionBox(scrollAwareBox);
 
-        //detecting if target is selected
+        //detecting if target is selected & add to a list of selected items
         const indexesToSelect: number[] = [];
         selectableItems.current.forEach((item, index) => {
           if (boxesIntersect(scrollAwareBox, item)) {
             indexesToSelect.push(index);
-            console.log(item);
+            console.log(index);
           }
         });
         
@@ -166,6 +166,7 @@ export const PoemView: React.FC<PoemViewProps> = ({
                                                         <PoemWord
                                                             num={keyIndex}
                                                             selectedIndexes={selectedIndexes}
+                                                            setSelectedIndexes={setSelectedIndexes}
                                                             color="black"
                                                             backgroundColor={colour_Bg}
                                                             borderColour="grey"
@@ -213,6 +214,7 @@ export const PoemView: React.FC<PoemViewProps> = ({
                                                             <PoemWord
                                                                 num={keyIndex}
                                                                 selectedIndexes={selectedIndexes}
+                                                                setSelectedIndexes={setSelectedIndexes}
                                                                 color="black"
                                                                 backgroundColor={colour_Bg}
                                                                 borderColour="grey"
@@ -307,6 +309,7 @@ interface PoemWordProps {
     bgButtonClicked:boolean;
     num: number;
     selectedIndexes:number[];
+    setSelectedIndexes: Function
 }
 
 export class PoemWord extends Component<PoemWordProps> {
@@ -348,11 +351,11 @@ export class PoemWord extends Component<PoemWordProps> {
         }
 
         if(this.props.selectedIndexes.includes(this.props.num)){
-            // console.log(this.props.text + " is selected");
             if(!this.state.selected){
                 this.setState({ selected: true });
-                this.addToArray(this.props.wordArray, this.props.text);
+                // this.addToArray(this.props.wordArray, this.props.text);
                 this.toggleColourTools();
+                console.log('reset state based on selectedIndexes')
             }
         }
     }
@@ -367,8 +370,10 @@ export class PoemWord extends Component<PoemWordProps> {
         console.log(removeTarget);
         this.updateNewArray(array);
     }
+
+    //used to toggle colour tools when there is no word selected, has nothing to do with word's state
     toggleColourTools = () => {
-        if(this.props.wordArray.length>0){
+        if(this.props.selectedIndexes.length>0){
             this.setWordStatus(true);
         }
         else{
@@ -380,11 +385,13 @@ export class PoemWord extends Component<PoemWordProps> {
         var { text, wordStatus } = this.props;
         if(this.state.selected){
             this.setState({ selected: false })
-            this.removeFromArray(this.props.wordArray, this.props.text);
+            this.removeFromArray(this.props.selectedIndexes, this.props.num);
+            console.log(this.props.selectedIndexes);
+            console.log(this.state.selected);
         }
         else{
             this.setState({ selected: true })
-            this.addToArray(this.props.wordArray, this.props.text);
+            this.addToArray(this.props.selectedIndexes, this.props.num);
         }
         this.toggleColourTools();
     };

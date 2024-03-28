@@ -93,15 +93,57 @@ export default function Editor() {
         [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
         [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
     ];
+    const poemTest1 =[
+        {
+            "stanzaSort": 1,
+            "color": "grey",
+            "strophes":
+                [
+                    {
+                        "stropheSort": 1,
+                        "color": "yellow",
+                        "words":
+                        [
+                            { "hebSort": 198628, "strong": "4210", "heb": "מִזְמ֗וֹר", "eng": "A Psalm", "wordColor": "", "backgroundColor": "", "borderColor": ""},
+                            { "hebSort": 198629, "strong": "1732", "heb": "מִזְמ֗וֹר", "eng": "of David ", "wordColor": "", "backgroundColor": "", "borderColor": ""}
+                        ]
+                    },
+                    {
+                        "stropheSort": 2,
+                        "color": "red",
+                        "words":
+                        [
+                            { "hebSort": 198630, "strong": "3051", "heb": "הָב֣וּ", "eng": "1 Give", "wordColor": "", "backgroundColor": "", "borderColor": ""},
+                            { "hebSort": 198631, "strong": "3068", "heb": "הָב֣וּ", "eng": "unto Yahweh", "wordColor": "", "backgroundColor": "", "borderColor": ""},
+                            { "hebSort": 198632, "strong": "1121", "heb": "הָב֣וּ", "eng": "sons", "wordColor": "", "backgroundColor": "", "borderColor": ""},
+                            { "hebSort": 198633, "strong": "410",  "heb": "הָב֣וּ", "eng": "you mighty ones ", "wordColor": "", "backgroundColor": "", "borderColor": ""},
+                            { "hebSort": 198634, "strong": "3051", "heb": "הָב֣וּ", "eng": "2 Give", "wordColor": "", "backgroundColor": "", "borderColor": ""},
+                            { "hebSort": 198635, "strong": "3068", "heb": "הָב֣וּ", "eng": "unto Yahweh", "wordColor": "", "backgroundColor": "", "borderColor": ""},
+                            { "hebSort": 198636, "strong": "3519", "heb": "הָב֣וּ", "eng": "glory", "wordColor": "", "backgroundColor": "", "borderColor": ""},
+                            { "hebSort": 198637, "strong": "5797", "heb": "הָב֣וּ", "eng": "and strength", "wordColor": "", "backgroundColor": "", "borderColor": ""}
+                        ]
+                    }
     
-    const poemTest2 = [
-        { 
-            id: 1, 
-            content: ["A Psalm","of David"] 
+                ]
         },
-        { id: 2, name: 'Item 2' },
-        { id: 3, name: 'Item 3' },
-    ];
+        {
+            "stanzaSort": 2,
+            "color": "green",
+            "strophes":
+                [
+                    {
+                        "stropheSort": 1,
+                        "color": "yellow",
+                        "words":
+                        [
+    
+                        ]
+                    }
+                ]
+        }
+    ]
+
+
     return (
         <div>
             <NavMain 
