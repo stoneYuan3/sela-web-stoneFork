@@ -122,7 +122,7 @@ export const NavTools = ( {selectedButton, poem, fontSize, onFontSizeUp, onFontS
 
     //controls the background colour of word boxes under stanzas.tsx
     //receive updates from colourPicker.tsx
-    const [colour_Bg, update_colourBg] = useState([{r:"255",g:"255",b:"255",a:"1"}]);
+    const [bgColor_custom, update_colourBg] = useState([{r:"255",g:"255",b:"255",a:"1"}]);
     const updateBgColour = (newColour) => {
         update_colourBg(newColour);
     }
@@ -154,16 +154,16 @@ export const NavTools = ( {selectedButton, poem, fontSize, onFontSizeUp, onFontS
                     poemContent={poem} 
                     mode="structure" 
                     fontSize={fontSize} 
-                    bgColour={color} 
+                    // bgColour={color} 
                     pickerStatus={pickerStatus} 
                     wordStatus={wordStatus} 
                     setWordStatus={setWordStatus} 
-                    wordArray={array_word}
+                    // wordArray={array_word}
                     selectedIndexes={selectedIndexes}
                     setSelectedIndexes={setSelectedIndexes}
 
-                    updateNewArray={updateNewArray}
-                    colour_Bg = {colour_Bg}
+                    // updateNewArray={updateNewArray}
+                    bgColor_custom = {bgColor_custom}
                     bgButtonClicked = {bgButtonClicked}
                 />
             )
@@ -177,16 +177,16 @@ export const NavTools = ( {selectedButton, poem, fontSize, onFontSizeUp, onFontS
                     poemContent={poem} 
                     mode="" 
                     fontSize={fontSize} 
-                    bgColour={color} 
+                    // bgColour={color} 
                     pickerStatus={pickerStatus} 
                     wordStatus={wordStatus} 
                     setWordStatus={setWordStatus} 
-                    wordArray={array_word}
+                    // wordArray={array_word}
                     selectedIndexes={selectedIndexes}
                     setSelectedIndexes={setSelectedIndexes}
 
-                    updateNewArray={updateNewArray}
-                    colour_Bg = {colour_Bg}
+                    // updateNewArray={updateNewArray}
+                    bgColor_custom = {bgColor_custom}
                     bgButtonClicked = {bgButtonClicked}
                 />         
             )
@@ -236,7 +236,7 @@ export const NavTools = ( {selectedButton, poem, fontSize, onFontSizeUp, onFontS
                                 pickerStatus={pickerStatus} 
                                 setPickerStatus={setPickerStatus} 
 
-                                colour_Bg = {colour_Bg}
+                                bgColor_custom = {bgColor_custom}
                                 setColourBg = {updateBgColour}
                                 handleButtonClick = {handleButtonClick}
                             />

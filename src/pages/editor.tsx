@@ -74,26 +74,26 @@ export default function Editor() {
         console.log(wordStatus);
     }
 
-    const poemTest = [
-        [["A Psalm","of David"]],
-        [["1 Give", "unto Yahweh", "sons", "You mighty ones", "Give", "unto Yahweh", "glory", "and strength"]],
-        [["2 Give", "unto Yahweh", "The glory due to", "His name", "Worship", "Yahweh", "In the beauty", "of Holiness"]],
-        [["3 The voice", "of Yahweh", "[is] over", "the waters", "the God", "of glory", "thunders", "Yahweh [is]", "over", "waters", "many"]],
-        [["4 The voice", "of Yahweh", "[is] powerful", "The voice", "of Yahweh", "[is full] of majesty"]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    // const poemTest = [
+    //     [["A Psalm","of David"]],
+    //     [["1 Give", "unto Yahweh", "sons", "You mighty ones", "Give", "unto Yahweh", "glory", "and strength"]],
+    //     [["2 Give", "unto Yahweh", "The glory due to", "His name", "Worship", "Yahweh", "In the beauty", "of Holiness"]],
+    //     [["3 The voice", "of Yahweh", "[is] over", "the waters", "the God", "of glory", "thunders", "Yahweh [is]", "over", "waters", "many"]],
+    //     [["4 The voice", "of Yahweh", "[is] powerful", "The voice", "of Yahweh", "[is full] of majesty"]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
 
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-        [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
-    ];
-    const poemTest1 =[
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    //     [["5 the voice", "of Yahweh", "breaks", "the cedars", "And yes splinters", "Yahweh", "-", "the cedars", "of lebanon",]],
+    // ];
+    const poemTest =[
         {
             "stanzaSort": 1,
             "color": "grey",
@@ -104,8 +104,8 @@ export default function Editor() {
                         "color": "yellow",
                         "words":
                         [
-                            { "hebSort": 198628, "strong": "4210", "heb": "מִזְמ֗וֹר", "eng": "A Psalm", "wordColor": "", "backgroundColor": "", "borderColor": ""},
-                            { "hebSort": 198629, "strong": "1732", "heb": "מִזְמ֗וֹר", "eng": "of David ", "wordColor": "", "backgroundColor": "", "borderColor": ""}
+                            { "hebSort": 198628, "strong": "4210", "heb": "מִזְמ֗וֹר", "eng": "A Psalm", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""},
+                            { "hebSort": 198629, "strong": "1732", "heb": "מִזְמ֗וֹר", "eng": "of David ", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""}
                         ]
                     },
                     {
@@ -113,14 +113,14 @@ export default function Editor() {
                         "color": "red",
                         "words":
                         [
-                            { "hebSort": 198630, "strong": "3051", "heb": "הָב֣וּ", "eng": "1 Give", "wordColor": "", "backgroundColor": "", "borderColor": ""},
-                            { "hebSort": 198631, "strong": "3068", "heb": "הָב֣וּ", "eng": "unto Yahweh", "wordColor": "", "backgroundColor": "", "borderColor": ""},
-                            { "hebSort": 198632, "strong": "1121", "heb": "הָב֣וּ", "eng": "sons", "wordColor": "", "backgroundColor": "", "borderColor": ""},
-                            { "hebSort": 198633, "strong": "410",  "heb": "הָב֣וּ", "eng": "you mighty ones ", "wordColor": "", "backgroundColor": "", "borderColor": ""},
-                            { "hebSort": 198634, "strong": "3051", "heb": "הָב֣וּ", "eng": "2 Give", "wordColor": "", "backgroundColor": "", "borderColor": ""},
-                            { "hebSort": 198635, "strong": "3068", "heb": "הָב֣וּ", "eng": "unto Yahweh", "wordColor": "", "backgroundColor": "", "borderColor": ""},
-                            { "hebSort": 198636, "strong": "3519", "heb": "הָב֣וּ", "eng": "glory", "wordColor": "", "backgroundColor": "", "borderColor": ""},
-                            { "hebSort": 198637, "strong": "5797", "heb": "הָב֣וּ", "eng": "and strength", "wordColor": "", "backgroundColor": "", "borderColor": ""}
+                            { "hebSort": 198630, "strong": "3051", "heb": "הָב֣וּ", "eng": "1 Give", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""},
+                            { "hebSort": 198631, "strong": "3068", "heb": "הָב֣וּ", "eng": "unto Yahweh", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""},
+                            { "hebSort": 198632, "strong": "1121", "heb": "הָב֣וּ", "eng": "sons", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""},
+                            { "hebSort": 198633, "strong": "410",  "heb": "הָב֣וּ", "eng": "you mighty ones ", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""},
+                            { "hebSort": 198634, "strong": "3051", "heb": "הָב֣וּ", "eng": "2 Give", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""},
+                            { "hebSort": 198635, "strong": "3068", "heb": "הָב֣וּ", "eng": "unto Yahweh", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""},
+                            { "hebSort": 198636, "strong": "3519", "heb": "הָב֣וּ", "eng": "glory", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""},
+                            { "hebSort": 198637, "strong": "5797", "heb": "הָב֣וּ", "eng": "and strength", "wordColor": "", "backgroundColor": {r:"255",g:"255",b:"255",a:"1"}, "borderColor": ""}
                         ]
                     }
     

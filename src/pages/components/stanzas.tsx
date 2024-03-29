@@ -12,39 +12,36 @@ interface PoemViewProps {
     poemContent: string[][][];
     mode: string;
     fontSize: number;
-    bgColour: any;
+    // bgColour: any;
     pickerStatus: boolean;
     wordStatus: boolean;
     setWordStatus: Function;
 
-    wordArray: [];
+    // wordArray: [];
     selectedIndexes:number[];
     setSelectedIndexes:Function;
-    updateNewArray: Function;
-    childState: any;
+    // updateNewArray: Function;
+    // childState: any;
 
-    colour_Bg: object;
+    bgColor_custom: object;
     bgButtonClicked: boolean;
-    // wordArrayAdd: Function;
 }
 
 export const PoemView: React.FC<PoemViewProps> = ({
     poemContent,
     mode,
     fontSize,
-    bgColour,
     pickerStatus,
     wordStatus,
     setWordStatus,
-    wordArray,
     selectedIndexes,
     setSelectedIndexes,
-    updateNewArray,
-    colour_Bg,
+
+    bgColor_custom,
     bgButtonClicked,
 }) => {
     var pickerOn = pickerStatus;
-    var background = bgColour;
+    // var background = bgColour;
 
     const componentStyle = {
         fontSize: fontSize,
@@ -151,30 +148,34 @@ export const PoemView: React.FC<PoemViewProps> = ({
                         ref={elementsContainerRef}
                     >
                         {
-                            poemContent.map((content, index) => (
+                            poemContent.map(content => (
                                 <PoemParagraph
-                                    num={index}
-                                    color={index % 2 === 0 ? "white" : "#EFEFEF"}
+                                    num={content.stanzaSort}
+                                    // color={index % 2 === 0 ? "white" : "#EFEFEF"}
+                                    color={content.color}
                                 >
-                                    {content.map((lineContent, lineIndex) => (
-                                        <PoemLine num={lineIndex}>
+                                    {content.strophes.map(lineContent => (
+                                        <PoemLine 
+                                            num={lineContent.stropheSort}
+                                        >
                                             {
-                                                lineContent.map((word, wordIndex) => 
+                                                lineContent.words.map(word => 
                                                     {
-                                                        let keyIndex = get1DIndex(index,lineIndex,wordIndex);
+                                                        // let keyIndex = get1DIndex(index,lineIndex,wordIndex);
                                                         return(
                                                         <PoemWord
-                                                            num={keyIndex}
+                                                            num={word.hebSort}
                                                             selectedIndexes={selectedIndexes}
                                                             setSelectedIndexes={setSelectedIndexes}
-                                                            color="black"
-                                                            backgroundColor={colour_Bg}
-                                                            borderColour="grey"
-                                                            text={word}
+                                                            color={word.wordColor}
+                                                            bgColor_default={word.backgroundColor}
+                                                            borderColour={word.borderColor}
+
+                                                            bgColor_custom={bgColor_custom}
+
+                                                            text={word.eng}
                                                             wordStatus={wordStatus}
                                                             setWordStatus={setWordStatus}
-                                                            wordArray={wordArray}
-                                                            updateNewArray={updateNewArray}
                                                             bgButtonClicked={bgButtonClicked}
                                                         />
                                                         );
@@ -201,33 +202,36 @@ export const PoemView: React.FC<PoemViewProps> = ({
                         ref={elementsContainerRef}
                     >
                         {
-                            poemContent.map((content, index) => (
-                                <PoemParagraph num={index} color={"white"}>
-                                    {content.map((lineContent, lineIndex) => (
-                                        <PoemLine num={lineIndex}>
+                            poemContent.map(content => (
+                                <PoemParagraph
+                                    num={content.stanzaSort}
+                                    // color={index % 2 === 0 ? "white" : "#EFEFEF"}
+                                    color={content.color}
+                                >
+                                    {content.strophes.map(lineContent => (
+                                        <PoemLine num={lineContent.stropheSort}>
                                             {
-                                                lineContent.map((word, wordIndex) => 
-
-                                                        {
-                                                            let keyIndex = get1DIndex(index,lineIndex,wordIndex);
-                                                            return(
+                                                lineContent.words.map(word => 
+                                                    {
+                                                        // let keyIndex = get1DIndex(index,lineIndex,wordIndex);
+                                                        return(
                                                             <PoemWord
-                                                                num={keyIndex}
-                                                                selectedIndexes={selectedIndexes}
-                                                                setSelectedIndexes={setSelectedIndexes}
-                                                                color="black"
-                                                                backgroundColor={colour_Bg}
-                                                                borderColour="grey"
-                                                                text={word}
-                                                                wordStatus={wordStatus}
-                                                                setWordStatus={setWordStatus}
-                                                                wordArray={wordArray}
-                                                                updateNewArray={updateNewArray}
-                                                                bgButtonClicked={bgButtonClicked}
-                                                            />
-                                                            );
-                                                        }
-                                                    
+                                                            num={word.hebSort}
+                                                            selectedIndexes={selectedIndexes}
+                                                            setSelectedIndexes={setSelectedIndexes}
+                                                            color={word.wordColor}
+                                                            bgColor_default={word.backgroundColor}
+                                                            borderColour={word.borderColor}
+
+                                                            bgColor_custom={bgColor_custom}
+
+                                                            text={word.eng}
+                                                            wordStatus={wordStatus}
+                                                            setWordStatus={setWordStatus}
+                                                            bgButtonClicked={bgButtonClicked}
+                                                        />
+                                                        );
+                                                    }
                                                 )
                                             }
                                         </PoemLine>
@@ -298,15 +302,13 @@ export class PoemLine extends Component<PoemLineProps> {
 
 interface PoemWordProps {
     color: string;
-    backgroundColor: object;
+    bgColor_custom: object;
     borderColour: string;
     text: string;
     wordStatus: boolean;
     setWordStatus: Function;
-    wordArray: [];
-    updateNewArray: Function;
-    // wordArrayAdd: Function;
     bgButtonClicked:boolean;
+    bgColor_default:object;
     num: number;
     selectedIndexes:number[];
     setSelectedIndexes: Function
@@ -315,20 +317,20 @@ interface PoemWordProps {
 export class PoemWord extends Component<PoemWordProps> {
 
     setWordStatus:Function;
-    updateNewArray:Function;
+    // updateNewArray:Function;
     constructor(props:any){
         super(props);
         this.setWordStatus=props.setWordStatus.bind(this);
-        this.updateNewArray=props.updateNewArray.bind(this);
+        // this.updateNewArray=props.updateNewArray.bind(this);
         this.state = {
             selected: props.wordStatus,
-            colour_Bg: props.backgroundColor
+            bgColor: props.bgColor_default
         };
     }
 
     state = {
         selected: false,
-        colour_Bg: {},
+        bgColor: {},
     };
 
     componentDidUpdate(prevProps) {
@@ -341,12 +343,12 @@ export class PoemWord extends Component<PoemWordProps> {
         }
         // if the colour of this word's state is different from backgroundColour AND picker button is clicked
         //ensures that colour changes only when the picker button is clicked
-        if (this.state.colour_Bg !== this.props.backgroundColor && prevProps.bgButtonClicked != this.props.bgButtonClicked) {
+        if (this.state.bgColor !== this.props.bgColor_custom && prevProps.bgButtonClicked != this.props.bgButtonClicked) {
             if(this.state.selected){
                 console.log('colour change')
                 console.log(this.props.bgButtonClicked);
-                this.setState({ colour_Bg: this.props.backgroundColor });
-                console.log(this.props.backgroundColor)
+                this.setState({ bgColor: this.props.bgColor_custom });
+                console.log(this.props.bgColor_custom)
             }
         }
 
@@ -362,13 +364,13 @@ export class PoemWord extends Component<PoemWordProps> {
 
     addToArray = (array:[], target) => {
         array.push(target);
-        this.updateNewArray(array);
+        // this.updateNewArray(array);
     }
     removeFromArray = (array:[], target) => {
         var removeTarget = array.indexOf(target);
         array.splice(removeTarget, 1);
         console.log(removeTarget);
-        this.updateNewArray(array);
+        // this.updateNewArray(array);
     }
 
     //used to toggle colour tools when there is no word selected, has nothing to do with word's state
@@ -398,9 +400,8 @@ export class PoemWord extends Component<PoemWordProps> {
 
     render() {
         const { color, borderColour, text, num, selectedIndexes } = this.props;
-        // console.log(selectedIndexes);
-        // console.log(num);
-        const bgColourValue = `rgba(${this.state.colour_Bg.r}, ${this.state.colour_Bg.g}, ${this.state.colour_Bg.b}, ${this.state.colour_Bg.a})`
+        const bgColourValue = `rgba(${this.state.bgColor.r}, ${this.state.bgColor.g}, ${this.state.bgColor.b}, ${this.state.bgColor.a})`
+
         const componentStyle = {
             color: color,
             backgroundColor: bgColourValue,
